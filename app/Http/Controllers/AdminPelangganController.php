@@ -47,9 +47,11 @@ class AdminPelangganController extends Controller
      * @param  \App\Models\Pelanggan  $pelanggan
      * @return \Illuminate\Http\Response
      */
-    public function show(Pelanggan $pelanggan)
+    public function show(Pelanggan $hutang)
     {
-        //
+        return view('dashboard.hutang.show', [
+            'datapelanggan' => $hutang
+        ]);
     }
 
     /**
@@ -58,9 +60,12 @@ class AdminPelangganController extends Controller
      * @param  \App\Models\Pelanggan  $pelanggan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pelanggan $pelanggan)
+    public function edit(Pelanggan $hutang)
     {
-        //
+        return view('dashboard.pelanggan.edit', [
+            'pelanggan' => $hutang
+           
+        ]);
     }
 
     /**
@@ -70,9 +75,15 @@ class AdminPelangganController extends Controller
      * @param  \App\Models\Pelanggan  $pelanggan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pelanggan $pelanggan)
+    public function update(Request $request, Pelanggan $hutang)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required',
+            'nohp' => 'required',
+            'hutang' => 'integer'
+        ]);
+        Pelanggan::where('id', $hutang->id)->update($validatedData); 
+        return redirect('/dashboard/hutang')->with('success','Berhasil Merubah Nota!');
     }
 
     /**

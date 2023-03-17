@@ -39,6 +39,9 @@
     <div class="mb-3">
       <label for="potongan" class="form-label">Potongan</label>
       <input type="number" class="form-control @error('potongan') is-invalid @enderror" id="potongan" name="potongan" value="{{ old('potongan', $nota->potongan) }}">
+
+      <input type="hidden" class="form-control @error('potongan') is-invalid @enderror" id="potonganasli" name="potonganasli" value="{{ old('potongan', $nota->potongan) }}">
+
       @error('potongan')
       <div class="invalid-feedback">
         {{ $message }}

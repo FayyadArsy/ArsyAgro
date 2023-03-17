@@ -17,6 +17,7 @@
           <th scope="col">Nama</th>
           <th scope="col">Hutang</th>
           <th scope="col">Nohp</th>
+          <th scope="col">Aksi</th>
         </tr>
       </thead>
       <tbody>
@@ -25,16 +26,16 @@
         <tr>
           <td>{{ $loop->iteration }}</td>
           <td>{{ $data->nama }}</td>
-          <td>{{ $data->hutang }}</td>
+          <td>{{"Rp. ".number_format($data->hutang, 0, ".", ".")  }}</td>
           <td>{{ $data->nohp }}</td>
           <td>
             <a href="/dashboard/hutang/{{ $data->id }}" class="badge bg-info"><span data-feather="eye"></span></a>
             <a href="/dashboard/hutang/{{ $data->id }}/edit" class="badge bg-warning"><span data-feather="edit"></span></a>
-            <form action="/dashboard/hutang/{{ $data->id }}" method="post" class="d-inline">
+            {{-- <form action="/dashboard/hutang/{{ $data->id }}" method="post" class="d-inline">
             @method('delete')
             @csrf
             <button class="badge bg-danger border-0" onclick="return confirm('Klik Ok Untuk Menghapus!')"><span data-feather="x-circle"></span></button>
-            </form>
+            </form> --}}
             
           </td>
         </tr>

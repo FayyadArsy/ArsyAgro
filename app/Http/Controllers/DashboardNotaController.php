@@ -40,13 +40,13 @@ class DashboardNotaController extends Controller
      */
     public function store(Request $request)
     {
+      
        // $result_explode = explode('|', $request->pelanggan_id);
         $validatedData = $request->validate([
             'nama' => 'required|alpha',
             'tonase' => 'required|integer',
             'harga' => 'required|integer|min:500',
             'potongan'=> 'integer',
-            
             'pelanggan_id' => 'required'
             
         ]);
@@ -95,6 +95,7 @@ class DashboardNotaController extends Controller
      */
     public function update(Request $request, Transaksi $nota)
     {
+        
         $validatedData = $request->validate([
             'nama' => 'required',
             'tonase' => 'required|integer',
@@ -103,11 +104,13 @@ class DashboardNotaController extends Controller
             'pelanggan_id' => 'required'
             
         ]);
+        
         $validatedData['user_id']= auth()->user()->id;
         //$validatedData['potongan']= ($request->tonase * $request->harga);
         Transaksi::where('id', $nota->id)->update($validatedData);
-        Pelanggan::where('id', $request->pelanggan_id)->decrement('hutang', $request->potongan); 
-        return redirect('/dashboard/notas')->with('success','Berhasil Merubah Nota!');
+    
+        Pelanggan::where('id', $request->pelanggan_id)->decrement('hutang', $validatedData['potongan']-$request->potonganasli);
+        return redirect('/dashboard/notas')->with('success','Berhasil Merubah Nota/Hutang!');
     }
 
     /**
@@ -118,6 +121,7 @@ class DashboardNotaController extends Controller
      */
     public function destroy(Transaksi $nota)
     {
+        Pelanggan::where('id', $nota->pelanggan_id)->increment('hutang', $nota->potongan);
         Transaksi::destroy($nota->id);
         return redirect('/dashboard/notas')->with('success','Berhasil Menghapus Nota!');
     }

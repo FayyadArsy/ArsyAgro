@@ -29,7 +29,7 @@
           <td>{{ $data->nama }}</td>
           <td>{{ $data->tonase }}</td>
           <td>{{ $data->harga }}</td>
-          <td>{{ $data->potongan }}</td>
+          <td>{{"Rp. ".number_format( $data->potongan , 0, ".", ".")}}</td>
           <td>
             <a href="/dashboard/notas/{{ $data->id }}" class="badge bg-info"><span data-feather="eye"></span></a>
             <a href="/dashboard/notas/{{ $data->id }}/edit" class="badge bg-warning"><span data-feather="edit"></span></a>

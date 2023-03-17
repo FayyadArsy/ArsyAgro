@@ -31,14 +31,8 @@
             {{$datapelanggan->harga }} = <b>{{$datapelanggan->tonase*$datapelanggan->harga}}</b> </h3>
         <h3>Potongan <b>{{$datapelanggan->potongan }}</b></h3>
         <h2>Total <b>{{$datapelanggan->tonase*$datapelanggan->harga-$datapelanggan->potongan }}</b></h2>
-        @if (is_null($datapelanggan->pelanggan))
-            <h2>Tidak Ada Hutang</h2>
-        @else    
         <h2>Sisa Hutang <b>{{ $datapelanggan->pelanggan->hutang }}</b></h2>
         <h2>Nama Pemilik Hutang <b>{{ ucwords(strtolower($datapelanggan->pelanggan->nama)) }}</b></h2>
-        @endif
-        
-        
     </div>
 
 {{-- yang di print --}}
@@ -50,13 +44,8 @@
     </h6>
     <h6 class="mp0">Potongan   <span style="float:right;"><b>{{"Rp. ".number_format($datapelanggan->potongan, 0, ".", ".") }}</b></span></h6>
     <h6 class="mp0">Terima <span style="float:right;"><b>{{"Rp. ".number_format($datapelanggan->tonase*$datapelanggan->harga-$datapelanggan->potongan, 0, ".", ".") }}</b></span></h6>
-    @if (is_null($datapelanggan->pelanggan))
-    <h6>Tidak Ada Hutang</h6>
-    @else    
     <h6 class="mp0">Sisa Hutang <span style="float:right;"><b>{{"Rp. ".number_format( $datapelanggan->pelanggan->hutang, 0, ".", ".") }}</b></span></h6>
     <p class="mp0"align="center">Pemilik Hutang <b>{{ ucwords(strtolower($datapelanggan->pelanggan->nama)) }}</b></p>
-    @endif
-    
     <p class="mp0"align="center">======|| NoNota {{$datapelanggan->id }} ||======</p>
 </div>
 </div>

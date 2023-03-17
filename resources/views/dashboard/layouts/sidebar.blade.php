@@ -23,7 +23,7 @@
       <li class="nav-item">
       <a class="nav-link {{ Request::is('dashboard/hutang*') ? 'active' : '' }}" href="/dashboard/hutang">
             <span data-feather="grid" class="align-text-bottom"></span>
-            Hutang
+            Pelanggan
           </a>
       </li>
     </ul>
