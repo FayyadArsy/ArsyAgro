@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\AdminPelangganController;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Pelanggan;
 use App\Models\Transaksi;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TripController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\DashboardNotaController;
-use Carbon\Carbon;
+use App\Http\Controllers\AdminPelangganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,4 +88,5 @@ Route::get('/dashboard', function(){
 Route::resource('/dashboard/notas', DashboardNotaController::class)->middleware('auth');
 
 Route::resource('/dashboard/hutang', AdminPelangganController::class)->except('show')->middleware('admin');
+Route::resource('/dashboard/trips', TripController::class)->middleware('admin');
 

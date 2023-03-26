@@ -26,6 +26,12 @@
             Pelanggan
           </a>
       </li>
+      <li class="nav-item">
+      <a class="nav-link {{ Request::is('dashboard/trips*') ? 'active' : '' }}" href="/dashboard/trips">
+            <span data-feather="grid" class="align-text-bottom"></span>
+            Trip
+          </a>
+      </li>
     </ul>
   @endcan
 
