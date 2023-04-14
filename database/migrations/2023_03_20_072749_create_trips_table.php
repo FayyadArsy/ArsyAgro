@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('transaksi_id');
-            $table->integer('trip_no');
+            $table->string('mobil'); 
+            $table->string('nota_id');
             $table->timestamps();
         });
     }

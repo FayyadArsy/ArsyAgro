@@ -8,8 +8,14 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ Request::is('dashboard/notas*') ? 'active' : '' }}" href="/dashboard/notas">
+          <a class="nav-link {{ Request::is('dashboard/nota') ? 'active' : '' }}" aria-current="page" href="/dashboard/nota">
             <span data-feather="file-text" class="align-text-bottom"></span>
+            Semua Nota
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ Request::is('dashboard/notas*') ? 'active' : '' }}" href="/dashboard/notas">
+            <span data-feather="user" class="align-text-bottom"></span>
             MyNota
           </a>
         </li>
@@ -22,7 +28,7 @@
     <ul class="nav flex-column">
       <li class="nav-item">
       <a class="nav-link {{ Request::is('dashboard/hutang*') ? 'active' : '' }}" href="/dashboard/hutang">
-            <span data-feather="grid" class="align-text-bottom"></span>
+            <span data-feather="list" class="align-text-bottom"></span>
             Pelanggan
           </a>
       </li>

@@ -16,7 +16,7 @@ class TripController extends Controller
     public function index()
     {
         return view('dashboard.trips.index', [
-            'transaksi' => Transaksi::where('user_id', auth()->user()->id)->latest()->get()
+            'transaksi' => Trip::get()
         ]);
     }
 
@@ -27,7 +27,11 @@ class TripController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.trips.create', [
+            "title" => "Info Trip",
+            "transaksi" => Transaksi::all()
+        
+        ]);
     }
 
     /**
@@ -49,7 +53,7 @@ class TripController extends Controller
      */
     public function show(Trip $trip)
     {
-        //
+       
     }
 
     /**

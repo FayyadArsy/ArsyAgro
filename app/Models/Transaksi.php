@@ -19,5 +19,9 @@ class Transaksi extends Model
     public function admin(){
         return $this->belongsTo(User::class, 'user_id');
     }
+    
+    public function trip(){
+        return $this->belongsTo(Trip::class);
+    }
 
 }

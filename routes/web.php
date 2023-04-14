@@ -67,6 +67,13 @@ Route::get('/register', [RegisterController::class, 'index'])->middleware('guest
 Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/dashboard', function(){
+    $today = Carbon::now('Asia/Jakarta')->locale('id','en');
+    return view('dashboard.index', [
+        "tanggal" => $today->isoFormat('dddd, LL'),
+    ]);
+})->middleware('auth');
+
+Route::get('dashboard/nota', function(){
     $halamanaktif = (request('page')) ?? 1;
     // $transaksi= Transaksi::with(['admin', 'pelanggan'])->latest()->paginate();
     $transaksi= Transaksi::with(['admin', 'pelanggan'])->wheredate('created_at', Transaksi::raw('curdate()'));
@@ -75,9 +82,9 @@ Route::get('/dashboard', function(){
     }
     $today = Carbon::now('Asia/Jakarta')->locale('id','en');
     $today->addDay(1-$halamanaktif, 'days');
-    return view('dashboard.index', [
+    return view('dashboard.nota', [
         
-        "active" => "nota",
+      
         "transaksi" => $transaksi->get(),
         //"tanggal" => date('l', strtotime( '+' . 1-$halamanaktif . ' days' )) .' '. date('d')+1-$halamanaktif,
         "tanggal" => $today->isoFormat('dddd, LL'),

@@ -1,10 +1,11 @@
 <?php
 
 namespace Database\Seeders;
+use App\Models\Trip;
 use App\Models\User;
-use App\Models\Transaksi;
 use App\Models\Pelanggan;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Transaksi;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -46,5 +47,6 @@ class DatabaseSeeder extends Seeder
             'password' => '$2y$10$GLnLyevELvak5Cn.G9lJpO7cNGruDlWGSM1H849vlXeX5p7yY6MTC', //password: fayyad
         
         ]);
+      
     }
 }
