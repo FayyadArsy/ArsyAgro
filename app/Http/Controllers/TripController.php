@@ -42,7 +42,19 @@ class TripController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $mobil=$request->input('mobil');
+        $trucks = $request->input('truk');
+        $carId = json_encode($trucks);
+    $user_id= auth()->user()->id;
+        Trip::create([
+        'nota_id' => $carId,
+        'mobil' => $mobil,
+        'user_id' => $user_id
+    ]);
+        
+ 
+       
+        return redirect('/dashboard/trips')->with('success','Berhasil Menambahkan Nota!');
     }
 
     /**

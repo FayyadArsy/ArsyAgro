@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('tonase');
             $table->integer('harga');
             $table->integer('potongan');
+            $table->integer('trip')->default(0);
             $table->timestamps();
         });
     }

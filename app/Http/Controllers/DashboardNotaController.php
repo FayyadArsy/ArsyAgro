@@ -40,7 +40,6 @@ class DashboardNotaController extends Controller
      */
     public function store(Request $request)
     {
-      
        // $result_explode = explode('|', $request->pelanggan_id);
         $validatedData = $request->validate([
             'nama' => 'required|alpha',
@@ -50,8 +49,6 @@ class DashboardNotaController extends Controller
             'pelanggan_id' => 'required'
             
         ]);
-  
-        //$validatedData['potongan']= ($request->potongan) ?? 0;
         $validatedData['user_id']= auth()->user()->id;
         Transaksi::create($validatedData);
         Pelanggan::where('id', $request->pelanggan_id)->decrement('hutang', $request->potongan); 
