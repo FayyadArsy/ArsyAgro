@@ -92,12 +92,11 @@ class DashboardNotaController extends Controller
      */
     public function update(Request $request, Transaksi $nota)
     {
-        
         $validatedData = $request->validate([
             'nama' => 'required',
             'tonase' => 'required|integer',
-            'harga' => 'required|integer|min:500',
-            'potongan' => 'integer',
+            'potongana' => 'integer',
+            'hargaaa' => 'required|integer|min:500',
             'pelanggan_id' => 'required'
             
         ]);

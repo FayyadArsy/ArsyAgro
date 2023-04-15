@@ -29,7 +29,7 @@ class TripController extends Controller
     {
         return view('dashboard.trips.create', [
             "title" => "Info Trip",
-            "transaksi" => Transaksi::all()
+            "transaksi" => Transaksi::where('trip', 0)->get()
         
         ]);
     }
@@ -42,15 +42,18 @@ class TripController extends Controller
      */
     public function store(Request $request)
     {
-      $mobil=$request->input('mobil');
+        $mobil=$request->input('mobil');
         $trucks = $request->input('truk');
         $carId = json_encode($trucks);
-    $user_id= auth()->user()->id;
+        $user_id= auth()->user()->id;
         Trip::create([
         'nota_id' => $carId,
         'mobil' => $mobil,
         'user_id' => $user_id
-    ]);
+        ]);
+        
+
+        Transaksi::whereIn('id', $trucks)->update(['trip' => true]);
         
  
        
@@ -65,7 +68,13 @@ class TripController extends Controller
      */
     public function show(Trip $trip)
     {
-       
+        $userIds = json_decode($trip->nota_id, true); // Convert the string to an array
+        $value = Transaksi::whereIn('id', $userIds)->get(); // Get the matching users
+
+        return view('dashboard.trips.show', [
+            'datas' => $trip,
+            'transaksi' => $value
+        ]);
     }
 
     /**

@@ -9,6 +9,9 @@
             Dashboard
           </a>
         </li>
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Nota</span>
+        </h6>
         <li class="nav-item">
           <a class="nav-link {{ Request::is('dashboard/nota') ? 'active' : '' }}" aria-current="page" href="/dashboard/nota">
             <span data-feather="file-text" class="align-text-bottom"></span>

@@ -22,13 +22,21 @@
       </thead>
       <tbody>
         @foreach ($transaksi as $data)
-
+       
         <tr>
           <td>{{ $loop->iteration }}</td>
-          <td>{{ $data->mobil }}</td>
+
+          @if ($data->mobil==1)
+          <td>Canter</td>
+          @elseif ($data->mobil==2)
+          <td>Dina</td>
+          @else
+          <td>Error!</td>
+          @endif
+
           <td>{{ $data->created_at }}</td>
           <td>
-            <a href="/dashboard/trips/create" class="badge bg-info"><span data-feather="eye"></span></a>
+            <a href="/dashboard/trips/{{ $data->id }}" class="badge bg-info"><span data-feather="eye"></span></a>
             <a href="/dashboard/trips/{{ $data->id }}/edit" class="badge bg-warning"><span data-feather="edit"></span></a>
             <form action="/dashboard/trips/{{ $data->id }}" method="post" class="d-inline">
             @method('delete')

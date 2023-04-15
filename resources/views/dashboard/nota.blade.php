@@ -41,7 +41,7 @@
 
 {{-- coba buat paginator --}}
 
-@if (Request::is('nota'))
+@if (Request::is('dashboard/nota'))
 
   <div class="d-flex justify-content-center">
     <nav>
