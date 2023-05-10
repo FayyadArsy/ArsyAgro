@@ -85,7 +85,9 @@ class TripController extends Controller
      */
     public function edit(Trip $trip)
     {
-        //
+        return view('dashboard.trips.edit', [
+            'trip' => $trip
+        ]);
     }
 
     /**
@@ -97,7 +99,14 @@ class TripController extends Controller
      */
     public function update(Request $request, Trip $trip)
     {
-        
+        $validatedData = $request->validate([
+            'mobil' => 'required'
+        ]);
+    
+        $trip->update([
+            'mobil' => $validatedData['mobil']
+        ]);
+   
     
     return redirect('/dashboard/trips')->with('success', 'Nota berhasil dihapus!');
     }
