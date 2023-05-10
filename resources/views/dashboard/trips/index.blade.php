@@ -31,10 +31,10 @@
           @elseif ($data->mobil==2)
           <td>Dina</td>
           @else
-          <td>Error!</td>
+          <td class="text-danger">Belum Diatur</td>
           @endif
 
-          <td>{{ $data->created_at }}</td>
+          <td>{{ $data->created_at->timezone('Asia/Jakarta') }}</td>
           <td>
             <a href="/dashboard/trips/{{ $data->id }}" class="badge bg-info"><span data-feather="eye"></span></a>
             <a href="/dashboard/trips/{{ $data->id }}/edit" class="badge bg-warning"><span data-feather="edit"></span></a>

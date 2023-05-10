@@ -29,8 +29,9 @@
             <a href="/dashboard/notas/{{ $data->id }}" class="badge bg-info"><span data-feather="eye"></span></a>
             <a href="/dashboard/notas/{{ $data->id }}/edit" class="badge bg-warning"><span data-feather="edit"></span></a>
             <form action="/dashboard/notas/{{ $data->id }}" method="post" class="d-inline">
-            @method('delete')
+            @method('patch')
             @csrf
+            <input type="hidden" name="trip" value="0">  
             <button class="badge bg-danger border-0" onclick="return confirm('Klik Ok Untuk Menghapus!')"><span data-feather="x-circle"></span></button>
             </form>
             

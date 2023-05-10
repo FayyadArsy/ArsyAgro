@@ -16,7 +16,7 @@ class TripController extends Controller
     public function index()
     {
         return view('dashboard.trips.index', [
-            'transaksi' => Trip::get()
+            'transaksi' => Trip::latest()->get()
         ]);
     }
 
@@ -97,7 +97,9 @@ class TripController extends Controller
      */
     public function update(Request $request, Trip $trip)
     {
-        //
+        
+    
+    return redirect('/dashboard/trips')->with('success', 'Nota berhasil dihapus!');
     }
 
     /**
@@ -108,6 +110,8 @@ class TripController extends Controller
      */
     public function destroy(Trip $trip)
     {
-        //
+        
+        Trip::destroy($trip->id);
+        return redirect('/dashboard/trips')->with('success','Berhasil Menghapus Nota!');
     }
 }

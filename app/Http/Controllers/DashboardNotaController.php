@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transaksi;
+use App\Models\Trip;
 use App\Models\Pelanggan;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 
 class DashboardNotaController extends Controller
@@ -92,11 +93,29 @@ class DashboardNotaController extends Controller
      */
     public function update(Request $request, Transaksi $nota)
     {
+        if ($request->has('trip')) {
+            // Update related transaksi records
+            $transaksi = Transaksi::findOrFail($nota->id);
+            $transaksi->trip = $request->input('trip');
+            $transaksi->save();
+
+            $trip = Trip::findOrFail(1); // assuming the trip record always has id of 1
+            $data = json_decode($trip->nota_id);
+            $key = array_search($nota->id, $data);
+            if ($key !== false) {
+                array_splice($data, $key, 1);
+                $trip->nota_id = json_encode($data);
+                $trip->save();
+            }
+
+
+           return redirect('/dashboard/trips')->with('success', 'Transaksi berhasil dihapus!');
+       } 
         $validatedData = $request->validate([
             'nama' => 'required',
             'tonase' => 'required|integer',
-            'potongana' => 'integer',
-            'hargaaa' => 'required|integer|min:500',
+            'potongan' => 'integer',
+            'harga' => 'required|integer|min:500',
             'pelanggan_id' => 'required'
             
         ]);
