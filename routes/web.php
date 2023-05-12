@@ -24,9 +24,10 @@ use App\Http\Controllers\AdminPelangganController;
 */
 
 Route::get('/', function () {
+    $today = Carbon::now('Asia/Jakarta')->locale('id','en');
     return view('home', [
-        "title" => "Home",
-        "active" => "home"
+        "tanggal" => $today->isoFormat('dddd D'),
+        "bulan" => $today->isoFormat('M')
     ]);
 });
 

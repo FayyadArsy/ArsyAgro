@@ -16,8 +16,11 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->guest() || !auth()->user()->is_admin){
-            abort(403);
+        if(auth()->guest()){
+            return redirect()->route('login');
+        }
+        elseif(!auth()->user()->is_admin){
+            return abort(403);
         }
         return $next($request);
     }

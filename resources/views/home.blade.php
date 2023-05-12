@@ -18,11 +18,24 @@
     <header class="parallax-window" data-parallax="scroll" data-image-src="/images/header-bg.jpg">
         <nav>
             <h1 class="logo"><a href="/">ArsyAgro</a></h1>
-            <a href="" class="btn-sign-up">Sign Up</a>
+            
+            <ul class="navbar-nav ms-auto">
+                @auth
+                 
+                    <a href="/dashboard" class="btn-sign-up">
+                      Welcome Back, {{ ucfirst(auth()->user()->name) }}
+                      
+                    </a>
+                   
+                 
+                @else
+                <a href="/login" class="btn-sign-up">Sign In</a>
+                @endauth
+              </ul>    
         </nav>
         <div class="header-title">Hasil Bumi.</div>
         <div class="header-bottom">
-            <p class="today-date">10 <span>/ 05</span></p>
+            <p class="today-date">{{ $tanggal }} <span>/ {{ $bulan }}</span></p>
             <ul class="social-media">
                 <li><a href="">Instagram</a></li>
                 <li><a href="">GitHub</a></li>
