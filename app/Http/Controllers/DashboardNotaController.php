@@ -93,18 +93,21 @@ class DashboardNotaController extends Controller
      */
     public function update(Request $request, Transaksi $nota)
     {
+        
         if ($request->has('trip')) {
             // Update related transaksi records
             $transaksi = Transaksi::findOrFail($nota->id);
             $transaksi->trip = $request->input('trip');
             $transaksi->save();
 
-            $trip = Trip::findOrFail(1); // assuming the trip record always has id of 1
+            $trip = Trip::findOrFail($request->id);
+           
             $data = json_decode($trip->nota_id);
+       
             $key = array_search($nota->id, $data);
             if ($key !== false) {
-                array_splice($data, $key, 1);
-                $trip->nota_id = json_encode($data);
+                unset($data[$key]);
+                $trip->nota_id = json_encode(array_values($data));
                 $trip->save();
             }
 

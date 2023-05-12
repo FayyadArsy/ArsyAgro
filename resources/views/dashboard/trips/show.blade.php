@@ -32,6 +32,7 @@
             @method('patch')
             @csrf
             <input type="hidden" name="trip" value="0">  
+            <input type="hidden" name="id" value= {{ $datas->id }}>  
             <button class="badge bg-danger border-0" onclick="return confirm('Klik Ok Untuk Menghapus!')"><span data-feather="x-circle"></span></button>
             </form>
             
