@@ -16,9 +16,9 @@
     </tr>
   </thead>
   <tbody>
-    
     {{-- NANTI KALAU UDH JADI BIKIN NAMA SEBAGAI LINK, IF TABLE HUTANG ADA LINK=AKTIF --}}
     @foreach( $transaksi as $data) 
+    @dd($data)
     
     <tr>
       <th scope="row">{{ $loop->iteration }}</th>

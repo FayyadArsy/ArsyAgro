@@ -14,10 +14,14 @@ class DashboardNotaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Transaksi $nota)
     {
+        $transaksi = Transaksi::with(['admin', 'pelanggan'])->where('user_id', auth()->user()->id)
+        ->latest()
+        ->paginate(50);
         return view('dashboard.notas.index', [
-            'transaksi' => Transaksi::where('user_id', auth()->user()->id)->latest()->get()
+            'transaksi' => $transaksi,
+            'datapelanggan' => $nota 
         ]);
     }
 
@@ -56,6 +60,13 @@ class DashboardNotaController extends Controller
        
         return redirect('/dashboard/notas')->with('success','Berhasil Menambahkan Nota!');
     }
+    public function print(Transaksi $nota)
+{
+   
+    return view('dashboard.notas.show', [
+        'datapelanggan' => $nota 
+    ]);
+}
 
     /**
      * Display the specified resource.
@@ -64,9 +75,11 @@ class DashboardNotaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Transaksi $nota)
+    
     {
         return view('dashboard.notas.show', [
-            'datapelanggan' => $nota
+            
+            'datapelanggan' => $nota 
         ]);
     }
 

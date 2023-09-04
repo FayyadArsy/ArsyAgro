@@ -69,31 +69,34 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/dashboard', function(){
     $today = Carbon::now('Asia/Jakarta')->locale('id','en');
+    $transaksi = Transaksi::with(['admin', 'pelanggan'])
+        ->where('trip', 1) // Mengambil data hanya jika 'trip' memiliki nilai 0
+        ->orderBy('created_at', 'desc') // Mengurutkan berdasarkan 'created_at' dari yang terbaru
+        ->get();
     return view('dashboard.index', [
         "tanggal" => $today->isoFormat('dddd, LL'),
+        "transaksi" => $transaksi,
     ]);
 })->middleware('auth');
 
 Route::get('dashboard/nota', function(){
     $halamanaktif = (request('page')) ?? 1;
-    // $transaksi= Transaksi::with(['admin', 'pelanggan'])->latest()->paginate();
-    $transaksi= Transaksi::with(['admin', 'pelanggan'])->wheredate('created_at', Transaksi::raw('curdate()'));
-    if(request('page')){
-        $transaksi= Transaksi::with(['admin', 'pelanggan'])->wheredate('created_at', Transaksi::raw('curdate()+1-'. (request('page'))));
-    }
-    $today = Carbon::now('Asia/Jakarta')->locale('id','en');
-    $today->addDay(1-$halamanaktif, 'days');
+    $today = Carbon::now('Asia/Jakarta')->locale('id', 'en');
+    $today->addDay(1 - $halamanaktif, 'days');
+    
+    $transaksi = Transaksi::with(['admin', 'pelanggan'])
+        ->whereDate('created_at', $today->toDateString());
+    
     return view('dashboard.nota', [
-        
-      
         "transaksi" => $transaksi->get(),
-        //"tanggal" => date('l', strtotime( '+' . 1-$halamanaktif . ' days' )) .' '. date('d')+1-$halamanaktif,
         "tanggal" => $today->isoFormat('dddd, LL'),
         "halamanaktif" => $halamanaktif
     ]);
 })->middleware('auth');
 
 Route::resource('/dashboard/notas', DashboardNotaController::class)->middleware('auth');
+Route::get('dashboard/notas/{id}', [DashboardNotaController::class, 'print'])->name('printNota');;
+
 
 Route::resource('/dashboard/hutang', AdminPelangganController::class)->except('show')->middleware('admin');
 Route::resource('/dashboard/trips', TripController::class)->middleware('admin');

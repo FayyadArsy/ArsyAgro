@@ -10,7 +10,7 @@
 @endif
 <div class="table-responsive">
   <a href="/dashboard/hutang/create" class="btn btn-primary mb-3">Tambah Hutang</a>
-    <table class="table table-striped table-sm">
+    <table class="table table-striped table-sm" style="font-size: 25px">
       <thead>
         <tr>
           <th scope="col">#</th>
