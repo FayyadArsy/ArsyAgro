@@ -16,6 +16,15 @@
           <th scope="col">Aksi</th>
         </tr>
       </thead>
+      <tfoot>
+        <tr>
+            <th colspan="2">Total:</th>
+            <th>{{ $totalTonase }}</th>
+            <th>{{ $totalHarga }}</th>
+            <th>{{"Rp. ".number_format($totalPotongan, 0, ".", ".")}}</th>
+            <th></th>
+        </tr>
+    </tfoot>
       <tbody>
         @foreach ($transaksi as $data)
 
@@ -31,7 +40,7 @@
             <form action="/dashboard/notas/{{ $data->id }}" method="post" class="d-inline">
             @method('patch')
             @csrf
-            <input type="hidden" name="trip" value="0">  
+            <input type="hidden" name="trip" value="0"> 
             <input type="hidden" name="id" value= {{ $datas->id }}>  
             <button class="badge bg-danger border-0" onclick="return confirm('Klik Ok Untuk Menghapus!')"><span data-feather="x-circle"></span></button>
             </form>

@@ -29,7 +29,7 @@ class TripController extends Controller
     {
         return view('dashboard.trips.create', [
             "title" => "Info Trip",
-            "transaksi" => Transaksi::where('trip', 0)->get()
+            "transaksi" => Transaksi::where('trip', 0)->latest()->get()
         
         ]);
     }
@@ -42,6 +42,7 @@ class TripController extends Controller
      */
     public function store(Request $request)
     {
+        
         $mobil=$request->input('mobil');
         $trucks = $request->input('truk');
         $carId = json_encode($trucks);
@@ -69,12 +70,18 @@ class TripController extends Controller
     public function show(Trip $trip)
     {
         $userIds = json_decode($trip->nota_id, true); // Convert the string to an array
-        $value = Transaksi::whereIn('id', $userIds)->get(); // Get the matching users
+        $transaksi = Transaksi::whereIn('id', $userIds)->get(); // Get the matching users
+        $totalTonase = $transaksi->sum('tonase');
+        $totalHarga = $transaksi->sum('harga');
+        $totalPotongan = $transaksi->sum('potongan');
 
         return view('dashboard.trips.show', [
             'datas' => $trip,
-            'transaksi' => $value
-        ]);
+            'transaksi' => $transaksi,
+            'totalTonase' => $totalTonase,
+            'totalHarga' => $totalHarga,
+            'totalPotongan' => $totalPotongan,
+    ]);
     }
 
     /**
@@ -99,6 +106,7 @@ class TripController extends Controller
      */
     public function update(Request $request, Trip $trip)
     {
+      
         $validatedData = $request->validate([
             'mobil' => 'required'
         ]);
@@ -120,7 +128,19 @@ class TripController extends Controller
     public function destroy(Trip $trip)
     {
         
-        Trip::destroy($trip->id);
+        $transaksi = Trip::findOrFail($trip->id);
+        $transaksiArray = json_decode($transaksi->nota_id);
+        
+        // Loop melalui array transaksi
+        foreach ($transaksiArray as $idTransaksi) {
+            // Ubah field 'bayar' pada tabel pelanggan menjadi 1
+            Transaksi::where('id', $idTransaksi)->update(['trip' => 0]);
+        }
+
+        // Hapus data trip
+        $transaksi->delete();
+
+        
         return redirect('/dashboard/trips')->with('success','Berhasil Menghapus Nota!');
     }
 }

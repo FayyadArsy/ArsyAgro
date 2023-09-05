@@ -125,7 +125,7 @@ class DashboardNotaController extends Controller
             }
 
 
-           return redirect('/dashboard/trips')->with('success', 'Transaksi berhasil dihapus!');
+            return back()->with('success', 'Transaksi berhasil dihapus!');
        } 
         $validatedData = $request->validate([
             'nama' => 'required',

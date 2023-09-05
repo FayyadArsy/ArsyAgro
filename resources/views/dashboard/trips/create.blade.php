@@ -5,7 +5,10 @@
 </div>
 <form method="post" action="/dashboard/trips">
   @csrf
+<div class="row ">
+  <div class="col">
 
+ 
   <select class="form-select" aria-label="Default select example" name="mobil">
     
     <option value="0">Select Option</option>
@@ -13,8 +16,11 @@
     <option value="2">Dina</option>
 
   </select>
-  
-
+</div>
+<div class="col d-flex flex-row-reverse">
+  <button type="submit" class="btn btn-primary">Submit</button> 
+</div>
+</div>
   <div class="table-responsive">
     <table class="table table-striped table-sm" style="font-size: 25px">
       <thead>
@@ -51,7 +57,6 @@
   </tbody>
 </table>
 </div>
-<button type="submit" class="btn btn-primary">Submit</button> 
 </form>
 
 @endsection

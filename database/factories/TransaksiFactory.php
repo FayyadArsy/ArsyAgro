@@ -16,7 +16,7 @@ class TransaksiFactory extends Factory
      */
     public function definition()
     {
-        $randomTimestamp = $this->faker->dateTimeBetween('-1000 days', 'now');
+        $randomTimestamp = $this->faker->dateTimeBetween('-10 days', 'now');
         return [
             'nama' => fake()->name(),
             'tonase' => fake()->numberBetween(0, 5000),
