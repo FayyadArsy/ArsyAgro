@@ -15,8 +15,21 @@ class TripController extends Controller
      */
     public function index()
     {
+    
+        $transaksi = Trip::latest()->get();
+    
+        // Calculate totalTonase for all trips
+        $totalTonase = 0;
+        foreach ($transaksi as $trip) {
+            $userIds = json_decode($trip->nota_id, true);
+            $transaksiData = Transaksi::whereIn('id', $userIds)->get();
+            $totalTonase = $transaksiData->sum('tonase');
+            $totalTonases[$trip->id] = $totalTonase;
+        }
+        
         return view('dashboard.trips.index', [
-            'transaksi' => Trip::latest()->get()
+            'transaksi' => $transaksi,
+            'totalTonase' => $totalTonases,
         ]);
     }
 

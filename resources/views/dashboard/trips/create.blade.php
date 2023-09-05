@@ -38,16 +38,15 @@
         @foreach( $transaksi as $data) 
         {{-- <input type="hidden" class="form-control" id="id" name="id[]" value="{{ $data->id }}"> --}}
     
-    <tr>
+    <tr class="clickable-row">
       <th scope="row">{{ $loop->iteration }}</th>
-      <td><a href="/nota/{{ $data->id }}">{{ ucfirst($data->nama) }}</a></td>
+      <td>{{ ucfirst($data->nama) }}</td>
       <td>{{ $data->tonase }}</td>
       <td><div class="form-check">
-        <input class="form-check-input" type="checkbox" name="truk[]" value="{{ $data->id }}" id="flexCheckDefault">
-        <label class="form-check-label" for="flexCheckDefault">
-          Truk
-        </label>
-      </div></td>
+            <input class="form-check-input" type="checkbox" name="truk[]" value="{{ $data->id }}" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">Truk</label>
+          </div>
+     </td>
 
     </tr>
   
@@ -58,5 +57,20 @@
 </table>
 </div>
 </form>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const rows = document.querySelectorAll('.clickable-row');
+
+    rows.forEach(row => {
+      row.addEventListener('click', (event) => {
+        // Check if the click occurred on the checkbox or its label
+        if (event.target.type !== 'checkbox') {
+          const checkbox = row.querySelector('input[type="checkbox"]');
+          checkbox.checked = !checkbox.checked;
+        }
+      });
+    });
+  });
+</script>
 
 @endsection
