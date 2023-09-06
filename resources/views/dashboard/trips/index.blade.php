@@ -14,7 +14,7 @@ use App\Models\Transaksi;
     </div>
 @endif
 <div class="table-responsive">
-  <a href="/dashboard/trips/create" class="btn btn-primary mb-3">Buat Nota</a>
+  <a href="/dashboard/trips/create" class="btn btn-primary mb-3">Buat Trip</a>
     
     <table class="table table-striped table-sm" style="font-size: 25px">
       <thead>

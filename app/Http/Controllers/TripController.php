@@ -87,6 +87,7 @@ class TripController extends Controller
         $totalTonase = $transaksi->sum('tonase');
         $totalHarga = $transaksi->sum('harga');
         $totalPotongan = $transaksi->sum('potongan');
+        $id = $trip->id;
 
         return view('dashboard.trips.show', [
             'datas' => $trip,
@@ -94,6 +95,7 @@ class TripController extends Controller
             'totalTonase' => $totalTonase,
             'totalHarga' => $totalHarga,
             'totalPotongan' => $totalPotongan,
+            'idHalaman' => $id,
     ]);
     }
 
@@ -105,8 +107,17 @@ class TripController extends Controller
      */
     public function edit(Trip $trip)
     {
+        if ($trip->mobil == 1) {
+            $mobil = "Canter";
+        } elseif ($trip->mobil == 2) {
+            $mobil = "Dina";
+        } else {
+            $mobil = "";
+        }
         return view('dashboard.trips.edit', [
-            'trip' => $trip
+           
+            'trip' => $trip,
+            'mobil' => $mobil
         ]);
     }
 

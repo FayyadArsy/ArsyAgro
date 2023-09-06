@@ -3,6 +3,8 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <h1 class="h2">Muatan Mobil</h1>
 </div>
+<a href="/dashboard/trips/create" class="btn btn-primary mb-3">Tambah Nota</a>
+<a href="/dashboard/trips/{{ $idHalaman }}/edit" class="btn btn-primary mb-3">DO</a>
 <div class="table-responsive">
   
     <table class="table table-striped table-responsive-sm" style="font-size: 25px">
@@ -52,5 +54,7 @@
       </tbody>
     </table>
 </div>
-
+<div class="">
+ 
+</div>
 @endsection
