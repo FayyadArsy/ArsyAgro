@@ -63,7 +63,9 @@ class TripController extends Controller
         Trip::create([
         'nota_id' => $carId,
         'mobil' => $mobil,
-        'user_id' => $user_id
+        'user_id' => $user_id,
+        'tonasePabrik' => 0,
+        'hargaPabrik' => 0,
         ]);
         
 
@@ -89,7 +91,7 @@ class TripController extends Controller
             return $item->tonase * $item->harga;
         });
         $id = $trip->id;
-
+        
         return view('dashboard.trips.show', [
             'datas' => $trip,
             'transaksi' => $transaksi,
@@ -130,13 +132,17 @@ class TripController extends Controller
      */
     public function update(Request $request, Trip $trip)
     {
-        dd($request, $trip);
+        
         $validatedData = $request->validate([
-            'mobil' => 'required'
+            'mobil' => 'required',
+            'tonasePabrik' => 'required',
+            'hargaPabrik' => 'required'
         ]);
     
         $trip->update([
-            'mobil' => $validatedData['mobil']
+            'mobil' => $validatedData['mobil'],
+            'tonasePabrik' => $validatedData['tonasePabrik'],
+            'hargaPabrik' => $validatedData['hargaPabrik']
         ]);
    
     

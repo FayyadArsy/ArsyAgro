@@ -75,36 +75,36 @@
   <tbody>
     <tr>
       <td scope="row">Pabrik</td>
-      <td>2100</td>
-      <td>10.000</td>
-      <td>21000000</td>
+      <td>{{ $datas->hargaPabrik }}</td>
+      <td>{{ $datas->tonasePabrik }}</td>
+      <td>{{ $datas->hargaPabrik * $datas->tonasePabrik }}</td>
     </tr>
     <tr>
       <td scope="row" >Gaji</td>
       <td>45</td>
-      <td>10.000</td>
-      <td>450.000</td>
+      <td>{{ $datas->tonasePabrik }}</td>
+      <td>{{ $gaji = 45 * $datas->tonasePabrik}}</td>
     </tr>
     <tr>
       <td scope="row">Amprah</td>
       <td>100</td>
-      <td>10.000</td>
-      <td>1000.000</td>
+      <td>{{ $datas->tonasePabrik }}</td>
+      <td>{{ $amprah = 100 * $datas->tonasePabrik}}</td>
     </tr>
     <tr>
           <td colspan="3">Total:</td>
-          <td>111</td> 
+          <td>{{ $total = ($datas->hargaPabrik * $datas->tonasePabrik)- $gaji -$amprah }}</td> 
     </tr>
   <tr>
         <td colspan="3">Total Beli:</td>    
-        <td>111</td>   
+        <td>{{ $totalBayar }}</td>   
   </tr>
   </tbody>
   <tfoot>
     <tr>
         <th colspan="3">Total Bersih:</th>
        
-        <th>1111</th>
+        <th>{{ $total - $totalBayar }}</th>
       
     </tr>
 </tfoot>

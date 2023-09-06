@@ -30,8 +30,8 @@
 <div class="row">
   <div class="col-md-7">
     <div class="input-group mb-3">
-      <input type="number" class="form-control" placeholder="Tonase Pabrik" name="tonase" aria-describedby="button-addon2">
-      <input type="number" class="form-control" placeholder="Harga Pabrik" name="tonase" aria-describedby="button-addon2">
+      <input type="number" class="form-control" placeholder="Tonase Pabrik" name="tonasePabrik">
+      <input type="number" class="form-control" placeholder="Harga Pabrik" name="hargaPabrik" aria-describedby="button-addon2">
       <button class="btn btn-outline-secondary  btn-secondary text-light " type="submit" id="button-addon2">Kirim</button>
     </div>
     
