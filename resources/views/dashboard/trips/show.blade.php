@@ -77,35 +77,35 @@
       <td scope="row">Pabrik</td>
       <td>{{ $datas->hargaPabrik }}</td>
       <td>{{ $datas->tonasePabrik }}</td>
-      <td>{{ $datas->hargaPabrik * $datas->tonasePabrik }}</td>
+      <td>{{ "Rp. ".number_format($datas->hargaPabrik * $datas->tonasePabrik, 0, ".", ".") }}</td>
     </tr>
     <tr>
       <td scope="row" >Gaji</td>
       <td>45</td>
       <td>{{ $datas->tonasePabrik }}</td>
-      <td>{{ $gaji = 45 * $datas->tonasePabrik}}</td>
+      <td>{{"Rp. ".number_format($gaji = 45 * $datas->tonasePabrik, 0, ".", ".") }}</td>
     </tr>
     <tr>
       <td scope="row">Amprah</td>
       <td>100</td>
       <td>{{ $datas->tonasePabrik }}</td>
-      <td>{{ $amprah = 100 * $datas->tonasePabrik}}</td>
+      <td>{{"Rp. ".number_format($amprah = 200 * $datas->tonasePabrik, 0, ".", ".") }}</td>
     </tr>
     <tr>
-          <td colspan="3">Total:</td>
-          <td>{{ $total = ($datas->hargaPabrik * $datas->tonasePabrik)- $gaji -$amprah }}</td> 
+      <td colspan="3">Total:</td>
+      <td>{{ "Rp. ".number_format($total = ($datas->hargaPabrik * $datas->tonasePabrik) - $gaji -$amprah, 0, ".", ".")  }}</td> 
     </tr>
   <tr>
         <td colspan="3">Total Beli:</td>    
-        <td>{{ $totalBayar }}</td>   
+        <td> {{"Rp. ".number_format($totalBayar, 0, ".", ".")}}</td>   
   </tr>
   </tbody>
   <tfoot>
     <tr>
         <th colspan="3">Total Bersih:</th>
        
-        <th>{{ $total - $totalBayar }}</th>
-      
+        <th> {{"Rp. ".number_format($total - $totalBayar, 0, ".", ".")}}</th>
+       
     </tr>
 </tfoot>
 </table>
