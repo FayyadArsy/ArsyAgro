@@ -14,29 +14,21 @@
           <th scope="col">Nama</th>
           <th scope="col">Tonase</th>
           <th scope="col">Harga</th>
-          <th scope="col">Potongan</th>
+          <th scope="col">Bayar</th>
           <th scope="col">Aksi</th>
         </tr>
       </thead>
-      <tfoot>
-        <tr>
-            <th colspan="2">Total:</th>
-            <th>{{ $totalTonase }}</th>
-            <th>{{ $totalHarga }}</th>
-            <th>{{"Rp. ".number_format($totalPotongan, 0, ".", ".")}}</th>
-            <th></th>
-        </tr>
-    </tfoot>
+      
       <tbody>
         
         @foreach ($transaksi as $data)
-
+     
         <tr>
           <td>{{ $loop->iteration }}</td>
           <td>{{ $data->nama }}</td>
           <td>{{ $data->tonase }}</td>
           <td>{{ $data->harga }}</td>
-          <td>{{"Rp. ".number_format( $data->potongan , 0, ".", ".")}}</td>
+          <td>{{"Rp. ".number_format( $data->tonase * $data->harga , 0, ".", ".")}}</td>
           <td>
             <a href="/dashboard/notas/{{ $data->id }}" class="badge bg-info"><span data-feather="eye"></span></a>
             <a href="/dashboard/notas/{{ $data->id }}/edit" class="badge bg-warning"><span data-feather="edit"></span></a>
@@ -50,11 +42,71 @@
             
           </td>
         </tr>
+      
         @endforeach
+      
+        
       </tbody>
+      <tfoot>
+        <tr>
+            <th colspan="2">Total:</th>
+            <th>{{ $totalTonase }}</th>
+            <th>#</th>
+            <th>{{"Rp. ".number_format($totalBayar, 0, ".", ".")}}</th>
+            <th></th>
+        </tr>
+    </tfoot>
     </table>
 </div>
-<div class="">
- 
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Hasil Akhir</h1>
 </div>
+
+<table class="table table-striped table-responsive-sm" style="font-size: 25px">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Harga</th>
+      <th scope="col">Tonase</th>
+      <th scope="col">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td scope="row">Pabrik</td>
+      <td>2100</td>
+      <td>10.000</td>
+      <td>21000000</td>
+    </tr>
+    <tr>
+      <td scope="row" >Gaji</td>
+      <td>45</td>
+      <td>10.000</td>
+      <td>450.000</td>
+    </tr>
+    <tr>
+      <td scope="row">Amprah</td>
+      <td>100</td>
+      <td>10.000</td>
+      <td>1000.000</td>
+    </tr>
+    <tr>
+          <td colspan="3">Total:</td>
+          <td>111</td> 
+    </tr>
+  <tr>
+        <td colspan="3">Total Beli:</td>    
+        <td>111</td>   
+  </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+        <th colspan="3">Total Bersih:</th>
+       
+        <th>1111</th>
+      
+    </tr>
+</tfoot>
+</table>
 @endsection

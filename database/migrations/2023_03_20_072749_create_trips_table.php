@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('mobil'); 
             $table->string('nota_id');
             $table->foreignId('user_id');
+            $table->integer('tonasePabrik');
+            $table->integer('hargaPabrik');
             $table->timestamps();
         });
     }

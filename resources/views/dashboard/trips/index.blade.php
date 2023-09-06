@@ -1,8 +1,6 @@
 @extends('dashboard.layouts.main')
 
-@php
-use App\Models\Transaksi;
-@endphp
+
 
 @section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -43,6 +41,7 @@ use App\Models\Transaksi;
           <td class="{{ $totalTonase[$transaksiItem->id] < 10000 ? '' : 'text-success' }}" >
             {{ $totalTonase[$transaksiItem->id] }}
           </td>
+        
          
          
           <td>{{ $transaksiItem->created_at->timezone('Asia/Jakarta') }}</td>

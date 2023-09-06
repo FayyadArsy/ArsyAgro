@@ -18,7 +18,7 @@ class TripController extends Controller
     
         $transaksi = Trip::latest()->get();
     
-        // Calculate totalTonase for all trips
+        $totalTonases = [];
         $totalTonase = 0;
         foreach ($transaksi as $trip) {
             $userIds = json_decode($trip->nota_id, true);
@@ -55,7 +55,7 @@ class TripController extends Controller
      */
     public function store(Request $request)
     {
-        
+      
         $mobil=$request->input('mobil');
         $trucks = $request->input('truk');
         $carId = json_encode($trucks);
@@ -85,16 +85,16 @@ class TripController extends Controller
         $userIds = json_decode($trip->nota_id, true); // Convert the string to an array
         $transaksi = Transaksi::whereIn('id', $userIds)->get(); // Get the matching users
         $totalTonase = $transaksi->sum('tonase');
-        $totalHarga = $transaksi->sum('harga');
-        $totalPotongan = $transaksi->sum('potongan');
+        $totalBayar = $transaksi->sum(function ($item) {
+            return $item->tonase * $item->harga;
+        });
         $id = $trip->id;
 
         return view('dashboard.trips.show', [
             'datas' => $trip,
             'transaksi' => $transaksi,
             'totalTonase' => $totalTonase,
-            'totalHarga' => $totalHarga,
-            'totalPotongan' => $totalPotongan,
+            'totalBayar' => $totalBayar,
             'idHalaman' => $id,
     ]);
     }
@@ -130,7 +130,7 @@ class TripController extends Controller
      */
     public function update(Request $request, Trip $trip)
     {
-      
+        dd($request, $trip);
         $validatedData = $request->validate([
             'mobil' => 'required'
         ]);
