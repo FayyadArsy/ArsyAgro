@@ -49,7 +49,7 @@ class AdminPelangganController extends Controller
      */
     public function show(Pelanggan $hutang)
     {
-        return view('dashboard.hutang.show', [
+        return view('dashboard.pelanggan.show', [
             'datapelanggan' => $hutang
         ]);
     }

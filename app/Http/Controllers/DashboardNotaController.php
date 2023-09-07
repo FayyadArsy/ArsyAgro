@@ -75,10 +75,8 @@ class DashboardNotaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Transaksi $nota)
-    
     {
         return view('dashboard.notas.show', [
-            
             'datapelanggan' => $nota 
         ]);
     }
@@ -106,16 +104,13 @@ class DashboardNotaController extends Controller
      */
     public function update(Request $request, Transaksi $nota)
     {
-        
         if ($request->has('trip')) {
-            $transaksi = Transaksi::findOrFail($nota->id);
-            $transaksi->trip = $request->input('trip');
-            $transaksi->save();
+            $transaksi = Transaksi::findOrFail($nota->id); //cari id nota
+            $transaksi->trip = $request->input('trip'); //setelah ketemu, ubah ke data input
+            $transaksi->save(); //save
 
             $trip = Trip::findOrFail($request->id);
-           
             $data = json_decode($trip->nota_id);
-       
             $key = array_search($nota->id, $data);
             if ($key !== false) {
                 unset($data[$key]);
@@ -123,8 +118,7 @@ class DashboardNotaController extends Controller
                 $trip->save();
             }
 
-
-            return back()->with('success', 'Berhasil');
+            return back()->with('success', 'Berhasil Mengeluarkan Nota');
        } 
         $validatedData = $request->validate([
             'nama' => 'required',
@@ -140,7 +134,7 @@ class DashboardNotaController extends Controller
         Transaksi::where('id', $nota->id)->update($validatedData);
     
         Pelanggan::where('id', $request->pelanggan_id)->decrement('hutang', $validatedData['potongan']-$request->potonganasli);
-        return redirect('/dashboard/notas')->with('success','Berhasil Merubah Nota/Hutang!');
+        return redirect('/dashboard/notas')->with('success','Berhasil Merubah Nota!');
     }
 
     /**

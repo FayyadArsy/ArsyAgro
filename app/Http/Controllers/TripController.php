@@ -72,7 +72,7 @@ class TripController extends Controller
         
  
        
-        return redirect('/dashboard/trips')->with('success','Berhasil Menambahkan Nota!');
+        return redirect('/dashboard/trips')->with('success','Berhasil Membuat Trip!');
     }
 
     /**
@@ -150,7 +150,7 @@ class TripController extends Controller
 
         case 'muatan':
 
-            $trucks = $request->input('truk');
+            $trucks = $request->input('truk') ?? [];
             $nota_id_array = json_decode($trip->nota_id, true);
             $hasil = array_merge($nota_id_array, $trucks);
             $user_id= auth()->user()->id;
@@ -163,7 +163,7 @@ class TripController extends Controller
         
    
     
-    return redirect('/dashboard/trips')->with('success', 'Nota berhasil dihapus!');
+    return redirect('/dashboard/trips')->with('success', 'Trip Diperharui!');
     }
 
     /**
@@ -174,7 +174,6 @@ class TripController extends Controller
      */
     public function destroy(Trip $trip)
     {
-        
         $transaksi = Trip::findOrFail($trip->id);
         $transaksiArray = json_decode($transaksi->nota_id);
         
@@ -188,6 +187,6 @@ class TripController extends Controller
         $transaksi->delete();
 
         
-        return redirect('/dashboard/trips')->with('success','Berhasil Menghapus Nota!');
+        return redirect('/dashboard/trips')->with('success','Berhasil Menghapus Data Trip');
     }
 }
