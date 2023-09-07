@@ -61,12 +61,12 @@ class DashboardNotaController extends Controller
         return redirect('/dashboard/notas')->with('success','Berhasil Menambahkan Nota!');
     }
     public function print(Transaksi $nota)
-{
+    {
    
     return view('dashboard.notas.show', [
         'datapelanggan' => $nota 
     ]);
-}
+    }
 
     /**
      * Display the specified resource.

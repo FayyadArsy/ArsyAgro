@@ -25,11 +25,11 @@
 
         <tr>
           <td>{{ $loop->iteration }}</td>
-          <td>{{ $data->nama }}</td>
+          <td><a href="/dashboard/hutang/{{ $data->nama }}">{{ $data->nama }}</a></td>
           <td>{{"Rp. ".number_format($data->hutang, 0, ".", ".")  }}</td>
           <td>{{ $data->nohp }}</td>
           <td>
-            <a href="/dashboard/hutang/{{ $data->id }}" class="badge bg-info"><span data-feather="eye"></span></a>
+            
             <a href="/dashboard/hutang/{{ $data->id }}/edit" class="badge bg-warning"><span data-feather="edit"></span></a>
             {{-- <form action="/dashboard/hutang/{{ $data->id }}" method="post" class="d-inline">
             @method('delete')

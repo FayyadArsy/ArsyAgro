@@ -97,7 +97,8 @@ Route::get('dashboard/nota', function(){
 Route::resource('/dashboard/notas', DashboardNotaController::class)->middleware('auth');
 Route::get('dashboard/notas/{id}', [DashboardNotaController::class, 'print'])->name('printNota');;
 
+Route::resource('/dashboard/hutang', AdminPelangganController::class)->except('show')->middleware('admin');
+Route::get('/dashboard/hutang/{pelanggan:nama}', [AdminPelangganController::class, 'catatanHutang']);
 
-Route::resource('/dashboard/hutang', AdminPelangganController::class)->middleware('admin');
 Route::resource('/dashboard/trips', TripController::class)->middleware('admin');
 

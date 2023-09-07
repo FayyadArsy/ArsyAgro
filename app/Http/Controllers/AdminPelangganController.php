@@ -96,4 +96,12 @@ class AdminPelangganController extends Controller
     {
         //
     }
+
+    public function catatanHutang(Pelanggan $pelanggan)
+    {
+        
+        return view('dashboard.pelanggan.show', [
+            'transaksi' => $pelanggan->transaksi->load('pelanggan','admin'),
+        ]);
+    }
 }
