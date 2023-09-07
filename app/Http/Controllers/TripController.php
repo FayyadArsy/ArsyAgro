@@ -55,7 +55,6 @@ class TripController extends Controller
      */
     public function store(Request $request)
     {
-      
         $mobil=$request->input('mobil');
         $trucks = $request->input('truk');
         $carId = json_encode($trucks);
@@ -116,10 +115,12 @@ class TripController extends Controller
         } else {
             $mobil = "";
         }
+        $transaksi =Transaksi::where('trip', 0)->latest()->get();
         return view('dashboard.trips.edit', [
            
             'trip' => $trip,
-            'mobil' => $mobil
+            'mobil' => $mobil,
+            'transaksis' => $transaksi,
         ]);
     }
 
@@ -130,20 +131,36 @@ class TripController extends Controller
      * @param  \App\Models\Trip  $trip
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Trip $trip)
+    public function update(Request $request, Trip $trip)  
     {
+       
+        switch ($request->input('action')) {
+        case 'notaPabrik':
+            $validatedData = $request->validate([
+                'mobil' => 'required',
+                'tonasePabrik' => 'required',
+                'hargaPabrik' => 'required'
+            ]);
+            $trip->update([
+                'mobil' => $validatedData['mobil'],
+                'tonasePabrik' => $validatedData['tonasePabrik'],
+                'hargaPabrik' => $validatedData['hargaPabrik']
+            ]);
+            break;
+
+        case 'muatan':
+
+            $trucks = $request->input('truk');
+            $nota_id_array = json_decode($trip->nota_id, true);
+            $hasil = array_merge($nota_id_array, $trucks);
+            $user_id= auth()->user()->id;
+            $trip->update(['nota_id' => $hasil,
+            'user_id' => $user_id]);
+            Transaksi::whereIn('id', $trucks)->update(['trip' => true]);
+            break;
+       
+    }
         
-        $validatedData = $request->validate([
-            'mobil' => 'required',
-            'tonasePabrik' => 'required',
-            'hargaPabrik' => 'required'
-        ]);
-    
-        $trip->update([
-            'mobil' => $validatedData['mobil'],
-            'tonasePabrik' => $validatedData['tonasePabrik'],
-            'hargaPabrik' => $validatedData['hargaPabrik']
-        ]);
    
     
     return redirect('/dashboard/trips')->with('success', 'Nota berhasil dihapus!');

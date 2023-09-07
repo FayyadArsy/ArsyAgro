@@ -108,7 +108,6 @@ class DashboardNotaController extends Controller
     {
         
         if ($request->has('trip')) {
-            // Update related transaksi records
             $transaksi = Transaksi::findOrFail($nota->id);
             $transaksi->trip = $request->input('trip');
             $transaksi->save();
@@ -125,7 +124,7 @@ class DashboardNotaController extends Controller
             }
 
 
-            return back()->with('success', 'Transaksi berhasil dihapus!');
+            return back()->with('success', 'Berhasil');
        } 
         $validatedData = $request->validate([
             'nama' => 'required',
