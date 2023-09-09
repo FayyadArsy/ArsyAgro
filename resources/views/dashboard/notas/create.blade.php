@@ -45,42 +45,28 @@
       </div>
   @enderror
     </div>
-        <div class="mb-3">
-      <label for="hutang" class="form-label">Hutang</label>
-      {{-- <select class="form-control selectpicker" id="select-country" data-live-search="true">
-        @foreach ($pelanggans as $pelanggan)
-            @if (old('pelanggan_id') == $pelanggan->id) 
-            <option value="{{ $pelanggan->id }}" selected>{{ $pelanggan->nama }}</option>
-            @else 
-            <option value="{{ $pelanggan->id }}">{{ $pelanggan->nama }}</option>
-            @endif
-            @endforeach
-        </select> --}}
-    
-          <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
-          <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="     crossorigin="anonymous"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
-          
-      <select class="" name="pelanggan_id" id="pelanggan" >
-        <option value="0">Select Option</option>
-        @foreach ($pelanggans as $pelanggan)
-            <option  value="{{ $pelanggan->id }}">{{ $pelanggan->nama }}</option>
-        @endforeach
-           
+
+      <div class="mb-3">
+
+        <select class="form-select wrapper "  name="pelanggan_id" id="pelanggan" onfocus='this.size=11;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+          <option value="0">Select Option</option>
+        <div class="">
+          @foreach ($pelanggans as $pelanggan)
+            <option  value="{{ $pelanggan->id }}">{{ $pelanggan->nama }} </option>
+          @endforeach
+        </div>
       </select>
       
-      <script type="text/javascript">
-        $(document).ready(function() {
-            $('#pelanggan').select2({
-              
-            });
-        });
-       </script>
-    </div>
+      
+      
+      </div>
+
     <button type="submit" class="btn btn-primary">Submit</button>
     
 </form>
 
 </div>
+
+
 
 @endsection

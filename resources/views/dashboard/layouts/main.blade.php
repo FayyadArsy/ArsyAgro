@@ -8,6 +8,7 @@
 
     <!-- CSS only -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    {{-- <link href="/css/bootstrap-select.min.css" rel="stylesheet"> --}}
     <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
@@ -29,7 +30,8 @@
 
 
     <!-- JavaScript Bundle with Popper -->
-<script src="/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/bootstrap.bundle.min.js"></script>
+  {{-- <script src="/js/bootstrap-select.min.js"></script> --}}
 
 
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
@@ -38,6 +40,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+    
     <script>
       $(document).ready(function() {
       $('#dataTable').DataTable();
